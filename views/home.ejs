@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <script src="/socket.io/socket.io.js"></script>
+   </head>
+   <body>
+      <input type="text" class="message" />
+      <button onclick="sendMessage()">Send Message</button>
+      <script>
+         const socket = io("http://localhost:3000");
+         socket.on("connection");
+
+         socket.on("message", (data)=>{               
+            document.querySelector('h1').innerHTML = data               //( Wait for Someone emit for data) and show into h1 tag
+         })
+
+         const sendMessage = () => {
+            const messageInput = document.querySelector('.message').value;
+            socket.emit("message", messageInput); // this is how write message event emit, other than this emit will send data. socket.emit
+         };
+      </script>
+      <h1></h1>
+   </body>
+</html>
